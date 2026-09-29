@@ -1,0 +1,146 @@
+/* Routta brand type — Archivo for display/numerics, Plus Jakarta Sans for UI text.
+   Self-hosted Geist Variable (fonts.css below) ships as a fallback family for any
+   future design-system alignment, but the shipped Routta prototype specifies
+   Archivo + Plus Jakarta Sans, so those drive the live UI. All @import rules must
+   stay at the very top of the file (before @theme/@layer) or the CSS bundler will
+   drop them with a "must precede all rules" warning. */
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Archivo:wght@400;500;600;700;800&display=swap");
+@import "./assets/fonts/fonts.css";
+@import "tailwindcss";
+
+@theme {
+  /* ---- Brand — Routta Deep (primary green ramp) ---- */
+  --color-primary-100: #e8f2ef;
+  --color-primary-200: #bfdcd3;
+  --color-primary-300: #6fa899;
+  --color-primary-400: #4e8577;
+  --color-primary-500: #1d6b5b;
+  --color-primary-600: #0b4a3e;
+  --color-primary-700: #003028;
+  --color-primary-800: #00241e;
+  --color-primary: #003028;
+  --color-primary-foreground: #ffffff;
+
+  /* ---- Accent — Signal Lime · movement only ---- */
+  --color-accent-tint: #f0fad6;
+  --color-accent: #c4f04a;
+  --color-accent-pressed: #a8d62e;
+  --color-accent-on-tint: #3f5a0e;
+  --color-accent-foreground: #12211d;
+
+  /* ---- Premium ride gold ---- */
+  --color-gold-tint: #fbf4e2;
+  --color-gold: #d9b96a;
+  --color-gold-strong: #e3c87f;
+  --color-gold-on: #7a5f26;
+  --color-gold-deep: #12211d;
+
+  /* ---- Neutrals — warm ---- */
+  --color-surface: #ffffff;
+  --color-raised: #fafaf8;
+  --color-bg: #f5f6f3;
+  --color-bg-alt: #edebe4;
+  --color-border: #e3e7e2;
+  --color-border-strong: #cfd6cf;
+  --color-muted: #78877f;
+  --color-muted-2: #9aa7a1;
+  --color-text-2: #43524d;
+  --color-text: #12211d;
+
+  /* ---- Semantic ---- */
+  --color-success: #1b8a5a;
+  --color-success-tint: #e7f5ee;
+  --color-success-strong: #136b46;
+  --color-warning: #b26a00;
+  --color-warning-tint: #fdf2df;
+  --color-warning-strong: #8a5200;
+  --color-error: #c33a2e;
+  --color-error-tint: #fbeae7;
+  --color-error-strong: #a32b21;
+  --color-info: #1d5fa8;
+  --color-info-tint: #e8f0fa;
+  --color-info-strong: #174c86;
+
+  /* ---- Type ---- */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-display: "Archivo", "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-geist: "Geist Variable", var(--font-sans);
+
+  /* ---- Radius scale ---- */
+  --radius-chip: 8px;
+  --radius-btn: 12px;
+  --radius-card: 16px;
+  --radius-sheet: 24px;
+  --radius-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-row: 0 1px 2px rgba(18, 33, 29, .06), 0 1px 3px rgba(18, 33, 29, .05);
+  --shadow-float: 0 4px 12px rgba(18, 33, 29, .09);
+  --shadow-sheet: 0 -8px 32px rgba(18, 33, 29, .16);
+
+  --animate-rt-in: rt-in .7s cubic-bezier(.2,.8,.2,1) both;
+  --animate-rt-spin: rt-spin .8s linear infinite;
+  --animate-rt-shimmer: rt-shimmer 1.3s linear infinite;
+  --animate-rt-ping: rt-ping 2.2s ease-out infinite;
+  --animate-rt-sheet: rt-sheet .28s cubic-bezier(.2,.8,.2,1);
+  --animate-rt-bar: rt-bar 1.3s ease-in-out infinite;
+}
+
+@keyframes rt-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes rt-sheet { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes rt-spin { to { transform: rotate(360deg); } }
+@keyframes rt-shimmer { 0% { background-position: -200px 0; } 100% { background-position: 320px 0; } }
+@keyframes rt-ping { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(2.2); opacity: 0; } }
+@keyframes rt-bar { 0% { transform: translateX(-100%); } 100% { transform: translateX(300%); } }
+@keyframes rt-toast { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes rt-dash { to { stroke-dashoffset: -28; } }
+@keyframes rt-drift { 0% { transform: translate(0,0); } 50% { transform: translate(0,-16px); } 100% { transform: translate(0,0); } }
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  color: inherit;
+}
+
+a {
+  color: var(--color-primary-600);
+  text-decoration: none;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Hide scrollbars on the mobile shell while keeping scroll functional */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
